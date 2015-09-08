@@ -10,3 +10,10 @@ stylus
 mquandalle:jade
 flemay:less-autoprefixer
 semantic:ui
+arch:ace-editor
+reactive-var
+meteorhacks:npm
+
+
+npm-container
+meteorhacks:async

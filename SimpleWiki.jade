@@ -1,0 +1,26 @@
+//- ===========================================================================
+//-      Copyright (C) 2015 by Vaughn Iverson
+//-      SimpleWiki is free software released under the MIT/X11 license.
+//-      See included LICENSE file for details.
+//- ===========================================================================
+
+head
+  title SimpleWiki
+
+body
+  div.ui.container.segment
+    h1 Welcome to SimpleWiki
+  +document
+  +editor
+
+template(name="document")
+  div.ui.container.segment
+    | Document text:
+    div#doc
+      | !{textHelp}
+
+template(name="editor")
+  div.ui.container.segment
+    div#edit
+    br
+    button.ui.button(id="commitButton") Commit changes

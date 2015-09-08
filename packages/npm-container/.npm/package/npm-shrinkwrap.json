@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "pdc": {
+      "version": "0.2.2"
+    }
+  }
+}
