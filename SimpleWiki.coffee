@@ -23,6 +23,14 @@ if Meteor.isClient
       console.log "Make Commit"
       docDb.update "Home", { $set: { text: editor.getValue() }}
 
+  updateDoc = () ->
+    timeout = null
+    Meteor.call 'pandoc', editor.getValue(), (err, res) ->
+      unless err
+        text.set res
+      else
+        console.warn "Pandoc method failed with #{err}"
+
   Template.editor.onRendered () ->
     AceEditor.instance "edit", { theme: "dawn", mode: "markdown" }, (e) ->
       editor = e
@@ -31,13 +39,6 @@ if Meteor.isClient
       editor.on 'change', (e) ->
         console.log "Changed!"
         console.log e
-        updateDoc = () ->
-          timeout = null
-          Meteor.call 'pandoc', editor.getValue(), (err, res) ->
-            unless err
-              text.set res
-            else
-              console.warn "Pandoc method failed with #{err}"
         unless timeout
           timeout = Meteor.setTimeout updateDoc, 2500
 
@@ -57,6 +58,7 @@ if Meteor.isClient
           docDb.insert doc
         console.log "Ready!", doc
         editor.setValue doc.text
+        updateDoc()
 
   Meteor.startup () ->
     # code to run on client at startup
